@@ -45,7 +45,7 @@ uninstall_1(){
     Y|y)  echo -e "Desinstalando..." ;
       sleep 3 ;
       rm -f $0 && rm -rf ~/secret ;
-      cd .. ;;
+      cd ;;
     N|n)  exit 0 ;;
     '\n') exit 0 ;; #[[ $enter_return ]] && return "$enter_return"
   esac
