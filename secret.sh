@@ -24,7 +24,7 @@ FIM='\033[m'          # Reseta a cor
 
 senha=$1
 ajuda=$1
-versao='1.2'
+versao='1.5'
 
 _Ajuda_(){
     echo -e "
@@ -44,7 +44,7 @@ uninstall_1(){
   case "$resposta_1" in
     Y|y)  echo -e "Desinstalando..." ;
       sleep 3 ;
-      rm -f $0 && rm -rf ~/secret ;;
+      rm -f $0 && rm -rf ~/secret | cd .. ;;
     N|n)  exit 0 ;;
     '\n') exit 0 ;; #[[ $enter_return ]] && return "$enter_return"
   esac
@@ -121,7 +121,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
   done
 else
   if [[ -z "$senha" ]]; then
-    echo -e "\n\t${RED}Nenhuma senha inserida${FIM}\n"
+    echo -e "\n\t${RED}Nenhuma senha/argumento inserido${FIM}\n"
     exit 0
   else
     if [[ "$senha" != "r0dricbr" ]]; then
