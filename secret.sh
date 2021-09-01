@@ -42,7 +42,9 @@ uninstall_1(){
   echo -e "Você deseja desinstalar o programa?\n"
   read -rp "Sim[y] Não[N]: " resposta_1
   case "$resposta_1" in
-    Y|y)  echo -e "Desinstalando..." ; sleep 3 ; rm -f $0 ;;
+    Y|y)  echo -e "Desinstalando..." ;
+      sleep 3 ;
+      rm -f $0 && rm -rf ~/secret ;;
     N|n)  exit 0 ;;
     '\n') exit 0 ;; #[[ $enter_return ]] && return "$enter_return"
   esac
