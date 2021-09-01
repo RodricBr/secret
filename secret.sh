@@ -44,7 +44,7 @@ uninstall_1(){
   case "$resposta_1" in
     Y|y)  echo -e "Desinstalando..." ;
       sleep 3 ;
-      rm -f $0 && rm -rf ~/$0 ;
+      rm -f $0 && rm -rf ~/secret ;
       cd .. ;
       exit 0 ;;
     N|n)  exit 0 ;;
