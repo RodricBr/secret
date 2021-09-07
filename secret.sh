@@ -160,3 +160,4 @@ fi
 
 # Informação de CPU
 # $ cat /proc/cpuinfo
+#
