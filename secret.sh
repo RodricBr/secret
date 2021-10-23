@@ -75,12 +75,14 @@ case $ajuda in
 esac
 
 _hex_(){
-  index=1
-  read -rp "$(echo -e $CYANO"Hex: "$FIM)" opcao_hex
-  for arg in $opcao_hex; do
-    echo -n $arg | sed 's/\([0-9A-F]\{2\}\)/\\\\\\x\1/gI' | xargs printf
-    let "index+=1"
-  done
+  if [[ -z "$*" ]]; then
+    read -rp "Digite um número hex: " opcao_hex2
+    echo -ne "O valor decimal do ${opcao_hex2} é: "
+    echo "obase=10; ibase=16; ${opcao_hex2}" | bc
+  else
+    echo -n "O valor decimal do $* é: "
+    echo "ibase=16; $*" | bc
+  fi
 }
 
 binario_(){
@@ -131,7 +133,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
     echo -e "\n<==================================>\n"
   done
 else
-  if [[ -z "$senha" ]]; then
+  if [[ -z "$@" ]]; then
     echo -e "\n\t${RED}Nenhuma senha/argumento inserido${FIM}"
     _Ajuda_
     exit 0
@@ -159,3 +161,4 @@ fi
 
 # Informação de CPU
 # $ cat /proc/cpuinfo
+
