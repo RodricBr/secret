@@ -102,13 +102,12 @@ binario_(){
 }
 
 lspci_(){
-  if [[ $(command -v lspci 2>/dev/null) ]]; then
-    echo -e "${VERMELHO}Erro:${FIM} lscpi não encontrado no seu sistema!\n\
+  if [[ ! -z $(command -v lspci 2>/dev/null) ]]; then
+    echo -e "${VERMELHO}Erro:${FIM} lspci não encontrado no seu sistema!\n\
     Favor instale para poder usar esta opção."
     exit 1
   else
-    respo=0
-    lspci | grep -e Ethernet | awk '{print $1}' >> "$respo"
+    respo=lspci | grep -e Ethernet | awk '{print $1}'
     lspci -s "$respo" -v
   fi
 }
