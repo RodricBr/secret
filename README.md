@@ -10,4 +10,11 @@
 > `git clone https://github.com/rodricbr/secret` <br>
 > `cd secret/;ls` <br>
 > `chmod +x secret.sh` <br>
-> `./secret.sh <-h | --help> (Senha de acesso: r0dricbr)` <br>
+> `./secret.sh <-h | --help> (Senha de acesso: r0dricbr)` </br> </br>
+
+```markdown
+### Changelog:
+> Data: 25/10/2021
+- Informações de Rede utilizando lspci
+- Informações do Sistema e de Memória
+```
