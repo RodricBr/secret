@@ -157,7 +157,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
           exit 0 ;;
       9) echo -e "${VERDE}\nInformações de rede:${FIM}\n\n" ;
           lspci_ ;;
-      0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
+      0) echo -e "${VERMELHO}\nFinalizando...${FIM}" ;
           exit 0 ;;
     esac
     echo -e "\n<==================================>\n"
