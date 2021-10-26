@@ -101,15 +101,15 @@ binario_(){
   done
 }
 
-lscpi_(){
-  if [[ $(command -v lscpi) ]]; then
+lspci_(){
+  if [[ $(command -v lspci 2>/dev/null) ]]; then
     echo -e "${VERMELHO}Erro:${FIM} lscpi não encontrado no seu sistema!\n\
     Favor instale para poder usar esta opção."
     exit 1
   else
     respo=0
-    lscpi | grep -e Ethernet | awk '{print $1}' >> "$respo"
-    lscpi -s "$respo" -v
+    lspci | grep -e Ethernet | awk '{print $1}' >> "$respo"
+    lspci -s "$respo" -v
   fi
 }
 
@@ -152,7 +152,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
           cat /proc/cpuinfo ; echo -e "\n${VERDE}Informações de memória:${FIM}\n\n" && cat /proc/meminfo ;
           exit 0 ;;
       9) echo -e "Informações de rede:\n " ;
-          lscpi_ ;;
+          lspci_ ;;
       0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
           exit 0 ;;
     esac
