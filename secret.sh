@@ -10,7 +10,7 @@
 Deixar com que apenas usuários permitidos possam ler
 e modificar o arquivo, para a senha não ser exibida
 
-Para fazer: criar um pompem da vida e inserir ele nesse programa! yay :(
+Para fazer: criar um pompem da vida e inserir ele nesse programa! yay ;(
 echo -e "\x72\x30\x64\x72\x69\x63\x62\x72" # Ofuscar a senha com hex
 
 FIM
@@ -29,7 +29,7 @@ versao='1.5'
 trap encerr 2
 
 encerr(){
-  echo -e "\n\n${VERMELHO}Processo interrompido\nFinalizando...${FIM}\n"
+  echo -e "\n\n${AMARELO}Processo interrompido\nSaíndo!${FIM}\n"
   exit 130
 }
 
@@ -117,6 +117,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
   5 Data e hora\n\t\
   6 Hex2Text\n\t\
   7 Tradutor Binario\n\t\
+  8 Informações do Sistema\n\t\
   0 Sair da aplicação${FIM}"
     read -rp "Sua escolha: " opcao_menu #-r para evitar quebrar/bugar o código
     case "$opcao_menu" in
@@ -134,7 +135,10 @@ if [[ "$senha" == "r0dricbr" ]]; then
           _hex_ ;;
       7) echo -e "${VERDE}\nComo usar:\nValor: 255 254 253 251${FIM}\n" ;
           binario_ ;;
-      0) echo -e "\n${VERMELHO}Finalizando...${FIM}" ;
+      8) echo -e "${CYANO}Informações do sistema:${FIM}\n\n" ;
+          cat /proc/cpuinfo ; echo -e "\n" && cat /proc/meminfo ;
+          exit 0 ;;
+      0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
           exit 0 ;;
     esac
     echo -e "\n<==================================>\n"
@@ -169,3 +173,5 @@ fi
 # Informação de CPU
 # $ cat /proc/cpuinfo
 
+# Fazer um método pra mudar de senha
+# dentro do menu, já logado como r0dricbr
