@@ -29,7 +29,7 @@ versao='1.5'
 trap encerr 2
 
 encerr(){
-  echo -e "\n\n${VERMELHO}Processo interrompido\nSaindo!${FIM}\n"
+  echo -e "\n\n${VERMELHO}Processo interrompido\nFinalizando...${FIM}\n"
   exit 130
 }
 
@@ -134,7 +134,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
           _hex_ ;;
       7) echo -e "${VERDE}\nComo usar:\nValor: 255 254 253 251${FIM}\n" ;
           binario_ ;;
-      0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
+      0) echo -e "\n${VERMELHO}Finalizando...${FIM}" ;
           exit 0 ;;
     esac
     echo -e "\n<==================================>\n"
