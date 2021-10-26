@@ -26,6 +26,13 @@ senha=$1
 ajuda=$1
 versao='1.5'
 
+trap encerr 2
+
+encerr(){
+  echo -e "\n\n${AMARELO}Processo interrompido\nSaindo!${FIM}\n"
+  exit 130
+}
+
 _Ajuda_(){
   echo -e "
   Modo de uso:\n \
