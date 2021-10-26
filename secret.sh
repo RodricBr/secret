@@ -24,7 +24,7 @@ FIM='\033[m'          # Reseta a cor
 
 senha=$1
 ajuda=$1
-versao='1.5'
+versao='2.0'
 
 trap encerr 2
 
@@ -86,6 +86,11 @@ _hex_(){
     read -rp "Digite um número hex: " opcao_hex2
     echo -ne "O valor decimal do ${opcao_hex2} é: "
     echo "obase=10; ibase=16; ${opcao_hex2}" | bc
+    if [[ ! -z $(command -v bc 2>/dev/null) ]]; then
+      echo -e "${VERMELHO}Erro:${FIM} bc não encontrado no seu sistema!\n\
+      Favor instale para poder usar esta opção."
+      exit 1
+    fi
   else
     echo -n "O valor decimal do $* é: "
     echo "ibase=16; $*" | bc
@@ -102,13 +107,13 @@ binario_(){
 }
 
 lspci_(){
-  if [[ ! -z $(command -v lspci 2>/dev/null) ]]; then
+  if [[ -z $(command -v lspci 2>/dev/null) ]]; then
     echo -e "${VERMELHO}Erro:${FIM} lspci não encontrado no seu sistema!\n\
     Favor instale para poder usar esta opção."
     exit 1
   else
-    respo=lspci | grep -e Ethernet | awk '{print $1}'
-    lspci -s "$respo" -v
+    respo=$(lspci | grep -e Ethernet | awk '{print $1}')
+    lspci -s $respo -v
   fi
 }
 
@@ -150,7 +155,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
       8) echo -e "${VERDE}\nInformações do sistema:${FIM}\n\n" ;
           cat /proc/cpuinfo ; echo -e "\n${VERDE}Informações de memória:${FIM}\n\n" && cat /proc/meminfo ;
           exit 0 ;;
-      9) echo -e "Informações de rede:\n " ;
+      9) echo -e "${VERDE}\nInformações de rede:${FIM}\n\n" ;
           lspci_ ;;
       0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
           exit 0 ;;
