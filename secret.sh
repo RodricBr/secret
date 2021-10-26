@@ -101,6 +101,18 @@ binario_(){
   done
 }
 
+lscpi_(){
+  if [[ $(command -v lscpi) ]]; then
+    echo -e "${VERMELHO}Erro:${FIM} lscpi não encontrado no seu sistema!\n\
+    Favor instale para poder usar esta opção."
+    exit 1
+  else
+    respo=0
+    lscpi | grep -e Ethernet | awk '{print $1}' >> "$respo"
+    lscpi -s "$respo" -v
+  fi
+}
+
 if [[ "$senha" == "r0dricbr" ]]; then
   echo -e "\n\t${VERDE}Sucesso!${FIM}\n"
   echo -e "\t${AMARELO}[V] Inicializando programa...${FIM}"
@@ -118,6 +130,7 @@ if [[ "$senha" == "r0dricbr" ]]; then
   6 Hex2Text\n\t\
   7 Tradutor Binario\n\t\
   8 Informações do Sistema\n\t\
+  9 Informações de Rede\n\t\
   0 Sair da aplicação${FIM}"
     read -rp "Sua escolha: " opcao_menu #-r para evitar quebrar/bugar o código
     case "$opcao_menu" in
@@ -135,9 +148,11 @@ if [[ "$senha" == "r0dricbr" ]]; then
           _hex_ ;;
       7) echo -e "${VERDE}\nComo usar:\nValor: 255 254 253 251${FIM}\n" ;
           binario_ ;;
-      8) echo -e "${CYANO}Informações do sistema:${FIM}\n\n" ;
-          cat /proc/cpuinfo ; echo -e "\n" && cat /proc/meminfo ;
+      8) echo -e "${VERDE}\nInformações do sistema:${FIM}\n\n" ;
+          cat /proc/cpuinfo ; echo -e "\n${VERDE}Informações de memória:${FIM}\n\n" && cat /proc/meminfo ;
           exit 0 ;;
+      9) echo -e "Informações de rede:\n " ;
+          lscpi_ ;;
       0) echo -e "${VERMELHO}Finalizando...${FIM}" ;
           exit 0 ;;
     esac
